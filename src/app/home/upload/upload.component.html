@@ -1,0 +1,147 @@
+<ng-template [ngIf]="!isFileSaved">
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+    <mat-card class="example-card">
+      <mat-toolbar color="primary">
+        Upload File
+      </mat-toolbar>
+      <mat-card-content>
+        <div class="grid">
+          <div class="grid">
+            <div class="form-group">
+              <app-file-upload formControlName="fileToUpload" [progress]="progress"></app-file-upload>
+              <div class="invalid-feedback" style="display: block">
+                <ng-container *ngIf="hasTypeErrors('fileToUpload', 'required')">This field is required</ng-container>
+                <ng-container *ngIf="hasTypeErrors('fileToUpload', 'requiredFileType')"> .js or .zip files are allowed
+                  🤡</ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <button mat-raised-button color="primary" [disabled]="!uploadForm.valid">Submit</button>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </form>
+</ng-template>
+
+<ng-template [ngIf]="isFileSaved">
+  <form [formGroup]="form" (ngSubmit)="updateData()">
+    <mat-card class="example-card">
+      <mat-toolbar color="primary">
+        Update Function Data
+      </mat-toolbar>
+      <mat-card-content>
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Code File</mat-label>
+              <input matInput formControlName="codeFile" placeholder="Placeholder">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Function Env</mat-label>
+              <mat-select formControlName="functionEnv">
+                <mat-option value="nodejs">Nodejs</mat-option>
+                <mat-option value="python">Python</mat-option>
+                <mat-option value="java">Java</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Function Builder</mat-label>
+              <mat-select formControlName="functionBuilder">
+                <mat-option value="1">option 1</mat-option>
+                <mat-option value="2">option 2</mat-option>
+                <mat-option value="3">option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="invalid-feedback" style="display: block">
+              <ng-container *ngIf="hasError('functionBuilder', 'required')">This field is required</ng-container>
+            </div>
+          </div>
+        </div>
+        <ng-template [ngIf]="enableFunctionPackage">
+          <div class="grid">
+            <div class="form-group">
+              <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+              <div class="invalid-feedback" style="display: block">
+                <ng-container *ngIf="hasError('file', 'required')">This field is required</ng-container>
+                <ng-container *ngIf="hasError('file', 'requiredFileType')">Only .zip file allowed 🤡</ng-container>
+              </div>
+            </div>
+
+          </div>
+        </ng-template>
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Cluster Ip</mat-label>
+              <input matInput formControlName="clusterIp" placeholder="Placeholder">
+            </mat-form-field>
+            <div class="invalid-feedback" style="display: block">
+              <ng-container *ngIf="hasError('clusterIp', 'required')">This field is required</ng-container>
+              <ng-container *ngIf="hasError('clusterIp', 'pattern')">Invaid IP Address</ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Function API URL</mat-label>
+              <input matInput formControlName="functionURL" placeholder="Placeholder">
+            </mat-form-field>
+            <div class="invalid-feedback" style="display: block">
+              <ng-container *ngIf="hasError('functionURL', 'required')">This field is required</ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Function Method</mat-label>
+              <mat-select formControlName="functionMethod">
+                <mat-option value="GET">GET</mat-option>
+                <mat-option value="POST">POST</mat-option>
+                <mat-option value="PUT">PUT</mat-option>
+                <mat-option value="PATCH">PATCH</mat-option>
+                <mat-option value="DELTE">DELETE</mat-option>
+                <mat-option value="HEAD">HEAD</mat-option>
+                <mat-option value="JSONP">JSONP</mat-option>
+                <mat-option value="OPTIONS">OPTIONS</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="invalid-feedback" style="display: block">
+              <ng-container *ngIf="hasError('functionMethod', 'required')">This field is required</ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Function Name</mat-label>
+              <input matInput formControlName="functionName" placeholder="Placeholder">
+            </mat-form-field>
+            <div class="invalid-feedback" style="display: block">
+              <ng-container *ngIf="hasError('functionName', 'required')">This field is required</ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <button type="button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+          <button mat-raised-button color="primary" (click)="updateData()">Submit</button>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </form>
+</ng-template>

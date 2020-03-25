@@ -1,0 +1,28 @@
+.example-card {
+    padding: 0;
+    mat-card-content   {
+        padding: 1rem;
+    }
+
+    p {
+        mat-form-field {
+            width: 50%;
+        }
+    }
+    .form-group {
+        width: 50%;
+        .mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .grid {
+        button {
+            text-align: start;
+
+            &:last-of-type {
+                margin-left: 2rem;
+            }
+        }
+    }
+}
